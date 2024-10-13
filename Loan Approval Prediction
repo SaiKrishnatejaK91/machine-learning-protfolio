@@ -8,7 +8,7 @@
 # Key concepts : 
   # Data Preprocessing: Analysing for missing values,Handling Categorical Variables,encoding to transform data for model input
   # Feature Engioneering: selecting and creating features to include model performance
-  # RandomForest Classifier : A model to predcit the loan status
+  # RandomForest Classifier : A model to predict the loan status
   # Model Evaluation : Model is evaluated by using metric ROC-AUC
 # Approach is mentioned below : 
 # Importing required libraries
