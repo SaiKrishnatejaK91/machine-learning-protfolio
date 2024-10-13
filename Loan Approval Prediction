@@ -1,0 +1,50 @@
+# Problem Statement : The goal of this project is to built a machine learning model that can predict whether a loan application is approved.This is very important for Financial Institutions as accurate pedictions can help in improving loan application process
+# Data set : The Dataset consists of training and test data set provided by kaggle as a part of competition. The training data set consists of 58646 rows and 13 Features,including variables such as person income,loan grade etc.The Target variable is loan status,which indicates whether a loan is approved (or) rejected 
+# Programming Language : Python
+# Libraries used : 
+  # Pandas : For Data manupulation and pre-processing
+  # Numppy : For numerical operations
+  # Scikit-learn : For Machine learning algorithm and model evaluation
+  # Matplot/Seaborn : For Data Visualization
+# Key concepts : 
+  # Data Preprocessin : Analysing for missing values,Handling Categorical Variables,encoding to transform data for model input
+  # Feature Engioneering: selecting and creating features to include model performance
+  # RandomForest Classifier : A model to predcit the loan status
+  # Model Evaluation : Model is evaluated by using metric ROC-AUC
+# Approach is mentioned below : 
+# Importing required libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import LabelEncoder
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import roc_curve,auc
+# Loading of training data from CSV File
+df='/kaggle/input/playground-series-s4e10/train.csv'
+train_data=pd.read_csv(df)
+# Checking for missing values
+df.isnull().sum()
+# Analyzing data types to identify categorical variables
+df.info()
+# Encoding categorical variables using LabelEncoder
+new=LabelEncoder()
+cat_col=train_data.select_dtypes(include=['object']).columns
+for col in cat_col:
+    train_data[col]=new.fit_transform(train_data[col])
+# Creating Input(X) and Output(Y) Variables
+X=train_data.drop('loan_status',axis=1)
+Y=train_data['loan_status']
+# Initializing and fitting RandomForestRegressor model
+model=RandomForestRegressor(random_state=10)
+model.fit(X,Y)
+# Loading Test Data for Prediction
+test_df='/kaggle/input/playground-series-s4e10/test.csv'
+test_data=pd.read_csv(test_df)
+test_col=test_data.select_dtypes(include=['object']).columns
+for col in test_col:
+    test_data[col]=new.fit_transform(test_data[col])
+# Making Predictions for Test Data
+res=model.predict(test_data)
+# Creating a submission file with predictions
+submission= pd.DataFrame({'id':test_data['id'],'loan_status':res})
+submission.to_csv('submission.csv',index=False)
