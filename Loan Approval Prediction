@@ -5,7 +5,6 @@
   # Pandas : For Data manupulation and pre-processing
   # Numppy : For numerical operations
   # Scikit-learn : For Machine learning algorithm and model evaluation
-  # Matplot/Seaborn : For Data Visualization
 # Key concepts : 
   # Data Preprocessin : Analysing for missing values,Handling Categorical Variables,encoding to transform data for model input
   # Feature Engioneering: selecting and creating features to include model performance
